@@ -1,7 +1,9 @@
 function validateUrl(value) {
-  var urlPattern = new RegExp('.*');
-
-      return !!urlPattern.test(value);
+  if (value !== undefined && value.length > 0) {
+		return true
+	} else {
+		return false
+	}
 }
 
 module.exports = { validateUrl };

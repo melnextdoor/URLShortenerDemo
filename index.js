@@ -1,8 +1,6 @@
 const  dotenv = require("dotenv");
 const  express = require("express");
 const  cors = require("cors");
-const  mongoose = require("mongoose");
-const  shortid = require("shortid");
 const  Url = require("./Url");
 const  utils = require("./utils/Util");
 
@@ -23,19 +21,12 @@ app.get("/", async (req, res) => {
 // URL shortener endpoint
 app.post("/short", async (req, res) => {
   console.log("HERE",req.body.url);
-  const { origUrl } = req.body;
-  const base = `http://localhost:3333`;
-
+  const origUrl = req.body.url
+  const base = process.env.DOMAIN_URL;
+  
   if (utils.validateUrl(origUrl)) {
     try {
-      const shortUrl = `${base}/2`;
-
-      // url = new Url({
-      //   origUrl,
-      //   shortUrl,
-      //   urlId,
-      //   date: new Date(),
-      // });
+      const shortUrl = `${base}/k7yUTc`;
 
       res.json(shortUrl);
     } catch (err) {
