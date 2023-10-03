@@ -1,7 +1,6 @@
 const  dotenv = require("dotenv");
 const  express = require("express");
 const  cors = require("cors");
-const  Url = require("./Url");
 const  utils = require("./utils/Util");
 
 // configure dotenv
@@ -21,12 +20,14 @@ app.get("/", async (req, res) => {
 // URL shortener endpoint
 app.post("/short", async (req, res) => {
   console.log("HERE",req.body.url);
-  const origUrl = req.body.url
+  const origUrl = req.body.url;
+  const IdLength = Number(process.env.SHORTIDMAX);
   const base = process.env.DOMAIN_URL;
   
   try {
     utils.validateUrl(origUrl)
-    const shortUrl = `${base}/k7yUTc`;
+    var id = Math.random().toString(36).slice(2, IdLength+2);
+    const shortUrl = `${base}/${id}`;
 
     res.json(shortUrl);
   } catch (err) {
