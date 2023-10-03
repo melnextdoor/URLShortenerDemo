@@ -24,14 +24,15 @@ app.post("/short", async (req, res) => {
   const origUrl = req.body.url
   const base = process.env.DOMAIN_URL;
   
-  if (utils.validateUrl(origUrl)) {
+  if (true) {
     try {
-      const shortUrl = `${base}/k7yUTc`;
+      utils.validateUrl(origUrl)
+      const shortUrl = `${base}k7yUTc`;
 
       res.json(shortUrl);
     } catch (err) {
       console.log(err);
-      res.status(500).json('Server Error');
+      res.status(500).json(err);
     }
   } else {
     res.status(400).json('Invalid Original Url');
