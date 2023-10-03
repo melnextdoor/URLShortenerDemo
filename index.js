@@ -24,34 +24,14 @@ app.post("/short", async (req, res) => {
   const origUrl = req.body.url
   const base = process.env.DOMAIN_URL;
   
-  if (true) {
-    try {
-      utils.validateUrl(origUrl)
-      const shortUrl = `${base}k7yUTc`;
-
-      res.json(shortUrl);
-    } catch (err) {
-      console.log(err);
-      res.status(500).json(err);
-    }
-  } else {
-    res.status(400).json('Invalid Original Url');
-  }
-});
-
-// redirect endpoint
-app.get("/:urlId", async (req, res) => {
   try {
-    const url = await Url.findOne({ urlId: req.params.urlId });
-    console.log(url)
-    if (url) {
-      url.clicks++;
-      url.save();
-      return res.redirect(url.origUrl);
-    } else res.status(404).json("Not found");
+    utils.validateUrl(origUrl)
+    const shortUrl = `${base}/k7yUTc`;
+
+    res.json(shortUrl);
   } catch (err) {
     console.log(err);
-    res.status(500).json("Server Error");
+    res.status(500).json(err);
   }
 });
 
